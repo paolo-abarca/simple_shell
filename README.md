@@ -1,2 +1,2 @@
 # simple_shell
-our first Simple Shell project
+#our first Simple Shell project
