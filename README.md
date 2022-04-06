@@ -83,13 +83,12 @@ executing_comand | Function that executes commands and handles errors
 tokenizer | Function that tokenizes the text string
 
 ## Examples interactive 
-```C
 
+```C
 
 ```
 ## Examples non -interactive 
 ```C
-
 
 ```
 ## Authors
