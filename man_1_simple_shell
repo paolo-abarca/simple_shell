@@ -1,0 +1,72 @@
+.TH  man sh "11/04/APRIL 2022" "1.0" "SIMPLE_SHELL"
+
+.SH NAME
+simple_shell
+command language interpreter
+
+.SH SYNOPSIS
+hsh [file_name]
+
+.SH DESCRIPTION
+This simple_shell was created to be a similar way of reading and interpreting user input commands interactive and non-interactive.
+
+.SH OVERVIEW
+As a simulation of simple_shell , it is responsible for reading the command lines from the terminal and interpreting them, it can also execute other commands.
+
+.SH BULTINS
+The following commands are supported:
+
+env - prints the enviornment variables
+
+exit - quits the program.
+
+Ctrl+C - Implementation of signal when enteringwhen entering ^C
+
+.SH COMPILER
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+
+.SH EXAMPLES
+.sp
+.SH INTERACTIVE MODE:
+$ ./hsh
+.sp
+($) /bin/ls
+.sp
+hsh main.c shell.c
+.sp
+($)
+.sp
+($) exit
+.sp
+$
+
+.SH NON-INTERACTIVE MODE:
+
+$ echo "/bin/ls" | ./hsh
+.sp
+hsh main.c shell.c test_ls_2
+.sp
+$
+.sp
+$ cat test_ls_2
+.sp
+/bin/ls
+.sp
+/bin/ls
+.sp
+$
+.sp
+hsh main.c shell.c test_ls_2
+.sp
+hsh main.c shell.c test_ls_2
+.sp
+$
+
+.SH RETURN VALUE
+Exit status at the end of a run
+
+.SH SEE ALSO
+man sh
+
+.SH AUTHOR
+Written by Gerardo Marin and Paolo abarca
