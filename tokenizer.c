@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * find_length - calculate the lenght of command line
- *@s: char pointer
- * Return: length of pointer
+ * word_counter - word count function
+ * @string: is the string
+ * Return: the number of words
  */
 unsigned int word_counter(char *string)
 {
-	unsigned int count_word = 0, i = 0, word = 0;
+	unsigned int i = 0, word = 0, count_word = 0;
 
 	while (string[i] != '\0')
 	{
@@ -24,22 +24,22 @@ unsigned int word_counter(char *string)
 }
 
 /**
- * s_tok - separate line in tokens
- * @str: command line
- * Return: char
+ * tokenizer - function that tokenizes the text string
+ * @string: is the string
+ * Return: the array with the tokens inside
  */
 char **tokenizer(char *string)
 {
 	char delimiter[] = " \t\n\r";
-	unsigned int len, i;
+	unsigned int counter, i;
 	char **array, *token;
 
 	string[_strlen(string) - 1] = '\0';
-	len = word_counter(string);
-	if (len == 0)
+	counter = word_counter(string);
+	if (counter == 0)
 		return ('\0');
 
-	array = malloc((sizeof(char *) * (len + 1)));
+	array = malloc((sizeof(char *) * (counter + 1)));
 	if (array == NULL)
 		return ('\0');
 
