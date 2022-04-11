@@ -16,19 +16,22 @@ extern char **environ;
 
 /* functions */
 int check_string(char *string);
+char **tokenizer(char *string);
+unsigned int word_counter(char *string);
+void array_free(char **array);
+int commands_functions(char *string, char **array, int *retVal);
+void parent_free(char *string, char **array);
+void my_env(char **environ);
+char *findpath(char *array, int *retVal);
+char *_strcat(char *s1, char *s2);
+
+
 char *_getenv(const char *name);
-char *findpath(char *command, int *retVal);
 int _strlen(char *s);
 int _strncmp(char *s1, char *s2, int n);
 char *str_concat(char *s1, char *s2);
 char *_strdup(char *str);
 char *_strncpy(char *dest, char *src, int n);
-void _free_parent(char *buffer, char **commands);
-void _free_double_pointer(char **pointer);
-unsigned int find_length(char *s);
-char **s_tok(char *str);
-int check_builtin(char *line, char **command, int *retVal);
-void built_env(char **environ);
 void error_printing(char *av, int count, char *command);
 void exec_error(char *av, int count, char *tmp_command);
 void print_string(char *str, int new_line);
