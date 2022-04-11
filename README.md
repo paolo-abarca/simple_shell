@@ -76,21 +76,75 @@ $
 
 Function  | Description
 ------------- | -------------
-array_free  | Function to release the array
-check_string | Function to check the string for delimiters 
-counter  | Function to count the words entered to the terminal
-executing_comand | Function that executes commands and handles errors
+check_string | Function to check the string for delimiters
 tokenizer | Function that tokenizes the text string
+word_counter | Function to count the words entered to the terminal
+array_free | Function that releases double pointer
+commands_functions |  exclusive function for exit and env
+my_env |  Function that prints all global variables
+findpath | Function to find folder from command path
+_getenv |  Function to get the folders from the PATH variable
+
 
 ## Examples interactive 
 
-```C
-
+```shell
+('0_0)=c[_] /bin/ls
+README.md     check_string.c        findpath.c         hsh      tokenizer.c
+a.out         commands_functions.c  get_environ.c      main.h
+array_free.c  error_print.c         holberton_tools.c  shell.c
 ```
+
+```shell
+('0_0)=c[_] ls -l
+total 80
+-rwxrwxrwx 1 root root  2206 Apr 11 06:37 README.md
+-rwxrwxrwx 1 root root 22392 Apr 11 16:45 a.out
+-rwxrwxrwx 1 root root   507 Apr 11 16:25 array_free.c
+-rwxrwxrwx 1 root root   328 Apr 11 16:25 check_string.c
+-rwxrwxrwx 1 root root   883 Apr 11 16:25 commands_functions.c
+-rwxrwxrwx 1 root root  1132 Apr 11 16:25 error_print.c
+-rwxrwxrwx 1 root root   832 Apr 11 16:25 findpath.c
+-rwxrwxrwx 1 root root   387 Apr 11 16:25 get_environ.c
+-rwxrwxrwx 1 root root  1503 Apr 11 16:25 holberton_tools.c
+-rwxrwxrwx 1 root root 22392 Apr 11 16:45 hsh
+-rwxrwxrwx 1 root root   913 Apr 11 16:25 main.h
+-rwxrwxrwx 1 root root   924 Apr 11 16:26 shell.c
+-rwxrwxrwx 1 root root  1182 Apr 11 16:25 tokenizer.c
+```
+
 ## Examples non -interactive 
-```C
 
+```shell
+gerardo@LAPTOP-AQ6UPBQG:/mnt/d/Holberton/simple_shell$ echo "/bin/ls" | ./hsh
+README.md     check_string.c        findpath.c         hsh      tokenizer.c
+a.out         commands_functions.c  get_environ.c      main.h
+array_free.c  error_print.c         holberton_tools.c  shell.c
 ```
+
+```shell
+gerardo@LAPTOP-AQ6UPBQG:/mnt/d/Holberton/simple_shell$ echo "ls -l" | ./hsh
+total 80
+-rwxrwxrwx 1 root root  2206 Apr 11 06:37 README.md
+-rwxrwxrwx 1 root root 22392 Apr 11 16:45 a.out
+-rwxrwxrwx 1 root root   507 Apr 11 16:25 array_free.c
+-rwxrwxrwx 1 root root   328 Apr 11 16:25 check_string.c
+-rwxrwxrwx 1 root root   883 Apr 11 16:25 commands_functions.c
+-rwxrwxrwx 1 root root  1132 Apr 11 16:25 error_print.c
+-rwxrwxrwx 1 root root   832 Apr 11 16:25 findpath.c
+-rwxrwxrwx 1 root root   387 Apr 11 16:25 get_environ.c
+-rwxrwxrwx 1 root root  1503 Apr 11 16:25 holberton_tools.c
+-rwxrwxrwx 1 root root 22392 Apr 11 16:45 hsh
+-rwxrwxrwx 1 root root   913 Apr 11 16:25 main.h
+-rwxrwxrwx 1 root root   924 Apr 11 16:26 shell.c
+-rwxrwxrwx 1 root root  1182 Apr 11 16:25 tokenizer.c
+```
+
+```shell
+gerardo@LAPTOP-AQ6UPBQG:/mnt/d/Holberton/simple_shell$ echo "pwd" | ./hsh
+/mnt/d/Holberton/simple_shell
+```
+
 ## Authors
 - Gerardo Marin Parra - [@GerardoMarin](https://github.com/gerardomp18)
 - Paolo Abarca - [@PaoloAbarca](https://github.com/paolo-abarca)
