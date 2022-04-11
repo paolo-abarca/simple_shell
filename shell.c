@@ -4,45 +4,45 @@
  * Return: Always 0 (Success)
  */
 int main(void)
-{	pid_t child;
-	char *line = NULL, **command = NULL;
-	size_t l_len = 0;
+{	pid_t pid;
+	char *string = NULL, **array = NULL;
+	size_t string_size = 0;
 	int status = 0, retVal = 0;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, "$ ", 2);
-		if (getline(&line, &l_len, stdin) == EOF)
+		if (getline(&string, &string_size, stdin) == EOF)
 			break;
-		if (*line == '\n' || *line == '\t')
+		if (*string == '\n' || *string == '\t')
 			continue;
-		command = s_tok(line);
-		if (command == NULL)
+		array = s_tok(string);
+		if (array == NULL)
 			continue;
-		if (check_builtin(line, command, &retVal) == 0)
+		if (check_builtin(string, array, &retVal) == 0)
 		{
-			child = fork();
-			if (child == 0)
+			pid = fork();
+			if (pid == 0)
 			{
-				if (execve(findpath(command[0], &retVal), command, environ) == -1)
+				if (execve(findpath(array[0], &retVal), array, environ) == -1)
 				{
-					_free_parent(line, command);
+					_free_parent(string, array);
 					exit(retVal);
 				}
 			}
 			else
 			{
 				wait(&status);
-				_free_parent(line, command);
+				_free_parent(string, array);
 				if (WIFEXITED(status))
 					retVal = WEXITSTATUS(status);
 			}
-			line = NULL;
+			string = NULL;
 		}
 		else
-			_free_double_pointer(command);
+			_free_double_pointer(array);
 	}
-	free(line);
+	free(string);
 	exit(status);
 }
