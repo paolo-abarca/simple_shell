@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * check_builtin - execute built-ins
- *@line: command line
- *@command: separate tokens
- *@retVal: return value of exit
- * Return: void
+ * commands_functions - exclusive function for exit and env
+ * @string: is the normal text string
+ * @array: is the tokenized string
+ * @retVal: return value of exit
+ * Return: if the command is neither exit or env, 0 will be returned
  */
 
 int commands_functions(char *string, char **array, int *retVal)
@@ -26,7 +26,7 @@ int commands_functions(char *string, char **array, int *retVal)
 		return (0);
 }
 /**
- * built_env - prints the environment
+ * my_env - is the function that prints all global variables
  * @environ: environ
  *
  * Return: void
