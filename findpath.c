@@ -6,37 +6,35 @@
  *@retVal: return value of exit
  * Return: the directory of the command
  */
-char *findpath(char *command, int *retVal)
+char *findpath(char *array, int *retVal)
 {
-	char *path, *commandtoprint;
-	struct stat stats;
-	char *current_source;
-	char *tok;
+	char *path, *reserved_array;
+	struct stat st;
+	char *original_command;
+	char *token_path;
 
-	if (stat(command, &stats) == 0)
-		return (command);
+	if (stat(array, &st) == 0)
+		return (array);
 
 	path = _getenv("PATH");
-	tok = strtok(path, ":");
-	commandtoprint = command;
-	command = str_concat("/", command);
+	token_path = strtok(path, ":");
+	reserved_array = array;
+	array = _strcat("/", array);
 
-/*stat() returns 0 on successful operation,*/
-/* otherwise returns -1 if unable to get file properties.*/
-	while (tok != NULL)
+	while (token_path != NULL)
 	{
-		current_source = str_concat(tok, command);
-		if (stat(current_source, &stats) == 0)
+		original_command = _strcat(token_path, array);
+		if (stat(original_command, &st) == 0)
 		{
-			free(command);
-			return (current_source);
+			free(array);
+			return (original_command);
 		}
-		free(current_source);
-		tok = strtok(NULL, ":");
+		free(original_command);
+		token_path = strtok(NULL, ":");
 	}
-	error_printing(path, find_length(command), commandtoprint);
+	error_printing(path, word_counter(array), reserved_array);
 	print_string(": not found", 0);
-	free(command);
+	free(array);
 	*retVal = 127;
 	return (NULL);
 }
