@@ -9,6 +9,7 @@ int main(void)
 	int status = 0, retVal = 0;
 	pid_t pid;
 
+	signal(SIGINT, SIG_IGN);
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
