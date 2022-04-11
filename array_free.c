@@ -1,39 +1,37 @@
 #include "main.h"
 
 /**
- * array_free - release the array
- *
- * @array: contains the tokens of the text string
+ * _free_double_pointer - Entry point
+ *@d_pointer: double pointer
+ * Return: void
  */
-
-void array_free(char **array)
+void _free_double_pointer(char **d_pointer)
 {
 	unsigned int i = 0;
 
-	if (array == NULL)
+	if (d_pointer == NULL)
 		return;
 
-	while (array[i] != NULL)
+	while (d_pointer[i])
 	{
-		free(array[i]);
+		free(d_pointer[i]);
 		++i;
 	}
 
-	if (array[i] == NULL)
-		free(array[i]);
+	if (d_pointer[i] == NULL)
+		free(d_pointer[i]);
 
-	free(array);
+	free(d_pointer);
 }
 
 /**
- * parent_free - release the string
- * @string: is the string
- * @array: the tokenized string
+ * _free_parent - Entry point
+ *@buffer: pointer
+ *@commands: double pointer
  * Return: void
  */
-
-void parent_free(char *string, char **array)
+void _free_parent(char *buffer, char **commands)
 {
-	free(string);
-	array_free(array);
+	free(buffer);
+	_free_double_pointer(commands);
 }
