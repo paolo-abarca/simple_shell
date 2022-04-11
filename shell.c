@@ -4,18 +4,18 @@
  * Return: Always 0 (Success)
  */
 int main(void)
-{	pid_t pid;
-	char *string = NULL, **array = NULL;
+{	char *string = NULL, **array = NULL;
 	size_t string_size = 0;
 	int status = 0, retVal = 0;
+	pid_t pid;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, "$ ", 2);
+			write(STDOUT_FILENO, "('0_0)=c[_] ", 12);
 		if (getline(&string, &string_size, stdin) == EOF)
 			break;
-		if (*string == '\n' || *string == '\t')
+		if (check_string(string) == 0)
 			continue;
 		array = s_tok(string);
 		if (array == NULL)
@@ -35,8 +35,6 @@ int main(void)
 			{
 				wait(&status);
 				_free_parent(string, array);
-				if (WIFEXITED(status))
-					retVal = WEXITSTATUS(status);
 			}
 			string = NULL;
 		}
