@@ -1,25 +1,25 @@
 #include "main.h"
 
 /**
- * _strlen - Function that returns string lenght
- * @s: pointer to string
- * Return: Length
+ * _strlen - is a function that counts the characters of a text string
+ * @string: is the string
+ * Return: the number
  */
-int _strlen(char *s)
+int _strlen(char *string)
 {
-	int l = 0;
+	int len = 0;
 
-	while (*s != '\0')
+	while (*string != '\0')
 	{
-		l++;
-		s++;
+		len++;
+		string++;
 	}
-	return (l);
+	return (len);
 }
 /**
- * _strncmp - Function that returns string lenght
- * @s1: pointer to string
- * @s2: pointer to string
+ * _strncmp - is a function that compares 2 strings
+ * @s1: is the first string
+ * @s2: is the second string
  * @n: number of positions to compare
  * Return: Compared string
  */
@@ -37,9 +37,9 @@ int _strncmp(char *s1, char *s2, int n)
 	return (0);
 }
 /**
- * str_concat - concatenate to strings
- *@s1: string
- *@s2: string
+ * _strcat - concatenate to strings
+ * @s1: is the first string
+ * @s2: is the second string
  * Return: the string concat
  */
 char *_strcat(char *s1, char *s2)
@@ -83,10 +83,10 @@ char *_strcat(char *s1, char *s2)
 	return (array);
 }
 /**
- * *_strncpy - check the code for Holberton School students.
- *@dest: char
- *@src: char
- *@n: int
+ * *_strncpy - is the functions that copies a string from string
+ *@dest: destination
+ *@src: source
+ *@n: number
  * Return: Always 0.
  */
 char *_strncpy(char *dest, char *src, int n)
@@ -103,31 +103,4 @@ char *_strncpy(char *dest, char *src, int n)
 	}
 
 	return (dest);
-}
-/**
- * _strdup - string duplicate with malloc
- *@str: string
- * Return: the string
- */
-char *_strdup(char *str)
-{
-	char *copy;
-	int i, largo = 0;
-
-	if (!str)
-		return (NULL);
-
-	while (str[largo] != '\0')
-	{
-		largo++;
-	}
-
-	copy = malloc(sizeof(char) * (largo + 1));
-	if (copy == NULL)
-		return (NULL);
-
-	for (i = 0; i <= largo; i++)
-		copy[i] = str[i];
-
-	return (copy);
 }
