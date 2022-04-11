@@ -15,6 +15,7 @@
 extern char **environ;
 
 /* functions */
+int check_string(char *string);
 char *_getenv(const char *name);
 char *findpath(char *command, int *retVal);
 int _strlen(char *s);
