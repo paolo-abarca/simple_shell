@@ -35,6 +35,8 @@ int main(void)
 			{
 				wait(&status);
 				_free_parent(string, array);
+				if (WIFEXITED(status))
+					retVal = WEXITSTATUS(status);
 			}
 			string = NULL;
 		}
