@@ -1,66 +1,62 @@
 #include "main.h"
 
 /**
- * word_counter - word count function
- *
- * @string: is the string
- * Return: the number of words
+ * find_length - calculate the lenght of command line
+ *@s: char pointer
+ * Return: length of pointer
  */
-
-unsigned int word_counter(char *string)
+unsigned int find_length(char *s)
 {
-	unsigned int i = 0, word = 0, counter_word = 0;
+	unsigned int count_tok = 0, i = 0, flag = 0;
 
-	while (string[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (string[i] != ' ')
-			word = 1;
-		if ((word && string[i + 1] == ' ') || (word && string[i + 1] == '\0'))
+		if (s[i] != ' ')
+			flag = 1;
+		if ((flag && s[i + 1] == ' ') || (flag && s[i + 1] == '\0'))
 		{
-			counter_word++;
-			word = 0;
+			++count_tok;
+			flag = 0;
 		}
-		i++;
+		++i;
 	}
-	return (counter_word);
+	return (count_tok);
 }
 
 /**
- * tokenizer - function that tokenizes the text string
- *
- * @string: is the string
- * Return: the array with the tokens inside
+ * s_tok - separate line in tokens
+ * @str: command line
+ * Return: char
  */
-
-char **tokenizer(char *string)
+char **s_tok(char *str)
 {
-	char delimiter[] = " \t\n\r";
-	unsigned int counter, i;
-	char **array, *token;
+	char separator[] = " \t\n\r";
+	char **command, *tok;
+	unsigned int len, i;
 
-	string[_strlen(string) - 1] = '\0';
-	counter = word_counter(string);
-	if (counter == 0)
+	str[_strlen(str) - 1] = '\0';
+	len = find_length(str);
+	if (len == 0)
 		return ('\0');
 
-	array = malloc((sizeof(char *) * (counter + 1)));
-	if (array == NULL)
+	command = malloc((sizeof(char *) * (len + 1)));
+	if (command == NULL)
 		return ('\0');
 
 	i = 0;
-	token = strtok(string, delimiter);
-	while (token != NULL)
+	tok = strtok(str, separator);
+	while (tok != NULL)
 	{
-		array[i] = malloc(_strlen(token) + 1);
-		if (array[i] == NULL)
+		command[i] = malloc(_strlen(tok) + 1);
+		if (command[i] == NULL)
 		{
-			array_free(array);
+			_free_double_pointer(command);
 			return ('\0');
 		}
-		_strncpy(array[i], token, _strlen(token) + 1);
-		token = strtok(NULL, delimiter);
-		i++;
+		_strncpy(command[i], tok, _strlen(tok) + 1);
+		tok = strtok(NULL, separator);
+		++i;
 	}
-	array[i] = NULL;
-	return (array);
+	command[i] = NULL;
+	return (command);
 }
