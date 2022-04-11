@@ -1,22 +1,20 @@
 #include "main.h"
 
 /**
- * _getenv - get the folders from the PATH variable
- *
- * @value: is the PATH
- * Return: all the folders in the PATH
+ * _getenv - gets environment variable.
+ * @name: name of variable
+ * Return: value
  */
-
-char *_getenv(const char *value)
+char *_getenv(const char *name)
 {
-	int len = _strlen((char *)value);
+	int len = _strlen((char *)name);
 	char **env = environ;
 
 	while (*env != NULL)
 	{
-		if (_strncmp(*env, (char *)value, len) == 0 && env[0][len] == '=')
+		if (_strncmp(*env, (char *)name, len) == 0 && env[0][len] == '=')
 			return (*env + len + 1);
 		env++;
-	}
+        }
 	return (NULL);
 }
