@@ -42,7 +42,7 @@ int _strncmp(char *s1, char *s2, int n)
  *@s2: string
  * Return: the string concat
  */
-char *str_concat(char *s1, char *s2)
+char *_strcat(char *s1, char *s2)
 {
 	char *array;
 	int i = 0, l1 = 0, l2 = 0;
