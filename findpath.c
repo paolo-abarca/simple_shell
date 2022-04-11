@@ -1,42 +1,42 @@
 #include "main.h"
 
 /**
- * findpath - find the command path folder
- *
- * @array: the command
- * @argv: is the name of the program
- * @num: is the order number
- * Return: the original command
+ * findpath - find the directory of a command
+ *@command: string with the command
+ *@retVal: return value of exit
+ * Return: the directory of the command
  */
-
-char *findpath(char *array, char *argv, char num)
+char *findpath(char *command, int *retVal)
 {
-	struct stat st;
-	char *path, *reserved_array;
-	char *token_path;
-	char *original_command;
+	char *path, *commandtoprint;
+	struct stat stats;
+	char *current_source;
+	char *tok;
 
-	if (stat(array, &st) == 0)
-		return (array);
+	if (stat(command, &stats) == 0)
+		return (command);
 
 	path = _getenv("PATH");
-	token_path = strtok(path, ":");
-	reserved_array = array;
-	array = _strcat("/", array);
+	tok = strtok(path, ":");
+	commandtoprint = command;
+	command = str_concat("/", command);
 
-	while (token_path != NULL)
+/*stat() returns 0 on successful operation,*/
+/* otherwise returns -1 if unable to get file properties.*/
+	while (tok != NULL)
 	{
-		original_command = _strcat(token_path, array);
-		if (stat(original_command, &st) == 0)
+		current_source = str_concat(tok, command);
+		if (stat(current_source, &stats) == 0)
 		{
-			free(array);
-			return (original_command);
+			free(command);
+			return (current_source);
 		}
-		free(original_command);
-		token_path = strtok(NULL, ":");
+		free(current_source);
+		tok = strtok(NULL, ":");
 	}
-	error_printing(argv, num, reserved_array);
+	error_printing(path, find_length(command), commandtoprint);
 	print_string(": not found", 0);
-	free(array);
+	free(command);
+	*retVal = 127;
 	return (NULL);
 }
