@@ -13,12 +13,9 @@ int check_string(char *string)
 
 	for (i = 0; string[i] != '\0'; i++)
 	{
-		if (string[i] != ' ' && string[i] != '\n')
+		if (string[i] != '\n' && string[i] != '\t')
 		{
-			if (string[i] != '\t')
-			{
-				return (1);
-			}
+			return (1);
 		}
 	}
 
