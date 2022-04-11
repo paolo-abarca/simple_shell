@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * main - UNIX command line interpreter
- * Return: Always 0 (Success)
+ * main - Entry point
+ * Return: Always 0
  */
 int main(void)
 {	char *string = NULL, **array = NULL;
@@ -17,31 +17,31 @@ int main(void)
 			break;
 		if (check_string(string) == 0)
 			continue;
-		array = s_tok(string);
+		array = tokenizer(string);
 		if (array == NULL)
 			continue;
-		if (check_builtin(string, array, &retVal) == 0)
+		if (commands_functions(string, array, &retVal) == 0)
 		{
 			pid = fork();
 			if (pid == 0)
 			{
 				if (execve(findpath(array[0], &retVal), array, environ) == -1)
 				{
-					_free_parent(string, array);
+					parent_free(string, array);
 					exit(retVal);
 				}
 			}
 			else
 			{
 				wait(&status);
-				_free_parent(string, array);
+				parent_free(string, array);
 				if (WIFEXITED(status))
 					retVal = WEXITSTATUS(status);
 			}
 			string = NULL;
 		}
 		else
-			_free_double_pointer(array);
+			array_free(array);
 	}
 	free(string);
 	exit(status);
