@@ -1,48 +1,46 @@
 #include "main.h"
 
 /**
- * commands_functions - exclusive function for exit, env and cd commands
- *
- * @array: is the tokenized string
- * @string: is the normal text string
- * Return: if the command is neither exit nor env, 0 will be returned
+ * check_builtin - execute built-ins
+ *@line: command line
+ *@command: separate tokens
+ *@retVal: return value of exit
+ * Return: void
  */
 
-int commands_functions(char **array, char *string)
+int check_builtin(char *line, char **command, int *retVal)
 {
-	char *_exit = "exit", *_env = "env";
+	char *b_exit = "exit", *b_env = "env";
 
-	if (_strncmp(array[0], _exit, 4) == 0)
+	if (_strncmp(command[0], b_exit, 4) == 0)
 	{
-		parent_free(string, array);
-		exit(0);
+		_free_parent(line, command);
+		exit(*retVal);
 	}
-	else if (_strncmp(array[0], _env, 3) == 0)
+	else if (_strncmp(command[0], b_env, 3) == 0)
 	{
-		my_env(environ);
+		built_env(environ);
 		return (1);
 	}
 	else
 		return (0);
 }
-
 /**
- * my_env - is the function that prints all global variables
+ * built_env - prints the environment
  * @environ: environ
  *
  * Return: void
  */
-
-void my_env(char **environ)
+void built_env(char **environ)
 {
 	unsigned int i, length;
 
 	i = 0;
-	while (environ[i] != NULL)
+	while (environ[i])
 	{
 		length = _strlen(environ[i]);
 		write(STDOUT_FILENO, environ[i], length);
 		write(STDOUT_FILENO, "\n", 1);
-		i++;
+		++i;
 	}
 }
