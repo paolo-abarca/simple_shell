@@ -1,49 +1,48 @@
 #include "main.h"
 /**
- * main - Entry point
- * @argc: argument counter unused
- * @argv: argument vector and name program
- * Return: Always 0
+ * main - UNIX command line interpreter
+ * Return: Always 0 (Success)
  */
-int main(int argc __attribute__((unused)), char *argv[])
-{	char *string = NULL, **array = NULL;
-	size_t string_size = 0;
-	char i = '0';
-	int status = 0;
-	pid_t pid;
+int main(void)
+{	pid_t child;
+	char *line = NULL, **command = NULL;
+	size_t l_len = 0;
+	int status = 0, retVal = 0;
 
 	while (1)
 	{
-		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "('0_0)=c[_] ", 12);
-		if (getline(&string, &string_size, stdin) == EOF)
-		{	printf("logout\n");
-			free(string);
-			exit(0); }
-		i++;
-		if (check_string(string) == 0)
-		{	free(string);
-			string = NULL;
-			continue; }
-		array = tokenizer(string);
-		if (array == NULL)
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "$ ", 2);
+		if (getline(&line, &l_len, stdin) == EOF)
+			break;
+		if (*line == '\n' || *line == '\t')
 			continue;
-		if (commands_functions(array, string) == 0)
+		command = s_tok(line);
+		if (command == NULL)
+			continue;
+		if (check_builtin(line, command, &retVal) == 0)
 		{
-			pid = fork();
-			if (pid == 0)
+			child = fork();
+			if (child == 0)
 			{
-				if (execve(findpath(array[0], argv[0], i), array, environ) == -1)
+				if (execve(findpath(command[0], &retVal), command, environ) == -1)
 				{
-					parent_free(string, array);
-					exit(0); } }
+					_free_parent(line, command);
+					exit(retVal);
+				}
+			}
 			else
-			{	wait(&status);
-				parent_free(string, array); }
-			string = NULL; }
+			{
+				wait(&status);
+				_free_parent(line, command);
+				if (WIFEXITED(status))
+					retVal = WEXITSTATUS(status);
+			}
+			line = NULL;
+		}
 		else
-			array_free(array);
+			_free_double_pointer(command);
 	}
-	free(string);
-	exit(0);
+	free(line);
+	exit(status);
 }
