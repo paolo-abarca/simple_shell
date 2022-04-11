@@ -58,7 +58,6 @@ $
 
 ## List of functions and system calls used
 
-- `access ` (man 2 access)
 - `execve ` (man 2 execve)
 - `exit `  (man 3 exit)
 - `fork `  (man 2 fork)
@@ -71,6 +70,7 @@ $
 - `strtok  `  (man 2 fstat)
 - `wait   ` (man 2 wait)
 - `write   `  (man 2 write)
+- `signal ` (man 2 signal)
 
 ## List of funciones
 
