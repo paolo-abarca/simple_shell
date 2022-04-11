@@ -1,9 +1,8 @@
 #include "main.h"
 
 /**
- * _free_double_pointer - Entry point
- * @array: double pointer
- * Return: void
+ * array_free - release the array
+ * @array: contains the tokens of the text string
  */
 void array_free(char **array)
 {
@@ -25,9 +24,9 @@ void array_free(char **array)
 }
 
 /**
- * _free_parent - Entry point
- *@buffer: pointer
- *@commands: double pointer
+ * parent_free - release the string
+ * @string: is the string
+ * @array: the tokenized string
  * Return: void
  */
 void parent_free(char *string, char **array)
