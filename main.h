@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <time.h>
+#include <signal.h>
 
 extern char **environ;
 
