@@ -2,26 +2,26 @@
 
 /**
  * _free_double_pointer - Entry point
- *@d_pointer: double pointer
+ * @array: double pointer
  * Return: void
  */
-void _free_double_pointer(char **d_pointer)
+void array_free(char **array)
 {
 	unsigned int i = 0;
 
-	if (d_pointer == NULL)
+	if (array == NULL)
 		return;
 
-	while (d_pointer[i])
+	while (array[i])
 	{
-		free(d_pointer[i]);
+		free(array[i]);
 		++i;
 	}
 
-	if (d_pointer[i] == NULL)
-		free(d_pointer[i]);
+	if (array[i] == NULL)
+		free(array[i]);
 
-	free(d_pointer);
+	free(array);
 }
 
 /**
@@ -30,8 +30,8 @@ void _free_double_pointer(char **d_pointer)
  *@commands: double pointer
  * Return: void
  */
-void _free_parent(char *buffer, char **commands)
+void parent_free(char *string, char **array)
 {
-	free(buffer);
-	_free_double_pointer(commands);
+	free(string);
+	array_free(array);
 }
