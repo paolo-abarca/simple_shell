@@ -1,17 +1,17 @@
 #include "main.h"
 
 /**
- * findpath - find the directory of a command
- *@command: string with the command
- *@retVal: return value of exit
- * Return: the directory of the command
+ * findpath - find the command path folder
+ * @array: the command
+ * @retVal: return value of exit
+ * Return: the original command
  */
 char *findpath(char *array, int *retVal)
 {
-	char *path, *reserved_array;
 	struct stat st;
-	char *original_command;
+	char *path, *reserved_array;
 	char *token_path;
+	char *original_command;
 
 	if (stat(array, &st) == 0)
 		return (array);
