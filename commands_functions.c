@@ -8,18 +8,18 @@
  * Return: void
  */
 
-int check_builtin(char *line, char **command, int *retVal)
+int commands_functions(char *string, char **array, int *retVal)
 {
-	char *b_exit = "exit", *b_env = "env";
+	char *_exit = "exit", *_env = "env";
 
-	if (_strncmp(command[0], b_exit, 4) == 0)
+	if (_strncmp(array[0], _exit, 4) == 0)
 	{
-		_free_parent(line, command);
+		parent_free(string, array);
 		exit(*retVal);
 	}
-	else if (_strncmp(command[0], b_env, 3) == 0)
+	else if (_strncmp(array[0], _env, 3) == 0)
 	{
-		built_env(environ);
+		my_env(environ);
 		return (1);
 	}
 	else
@@ -31,7 +31,7 @@ int check_builtin(char *line, char **command, int *retVal)
  *
  * Return: void
  */
-void built_env(char **environ)
+void my_env(char **environ)
 {
 	unsigned int i, length;
 
