@@ -7,6 +7,7 @@ int main(void)
 {	char *string = NULL, **array = NULL;
 	size_t string_size = 0;
 	int status = 0, retVal = 0;
+	char i = '0';
 	pid_t pid;
 
 	signal(SIGINT, SIG_IGN);
@@ -16,6 +17,7 @@ int main(void)
 			write(STDOUT_FILENO, "('0_0)=c[_] ", 12);
 		if (getline(&string, &string_size, stdin) == EOF)
 			break;
+		i++;
 		if (check_string(string) == 0)
 			continue;
 		array = tokenizer(string);
@@ -26,7 +28,7 @@ int main(void)
 			pid = fork();
 			if (pid == 0)
 			{
-				if (execve(findpath(array[0], &retVal), array, environ) == -1)
+				if (execve(findpath(array[0], &retVal, i), array, environ) == -1)
 				{
 					parent_free(string, array);
 					exit(retVal);
