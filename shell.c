@@ -39,13 +39,10 @@ int main(void)
 				wait(&status);
 				parent_free(string, array);
 				if (WIFEXITED(status))
-					retVal = WEXITSTATUS(status);
-			}
-			string = NULL;
-		}
+					retVal = WEXITSTATUS(status); }
+			string = NULL; }
 		else
-			array_free(array);
-	}
+			array_free(array); }
 	free(string);
 	exit(status);
 }
