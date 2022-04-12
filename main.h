@@ -24,12 +24,11 @@ int commands_functions(char *string, char **array, int *retVal);
 int _strncmp(char *s1, char *s2, int n);
 void parent_free(char *string, char **array);
 void my_env(char **environ);
-char *findpath(char *array, int *retVal);
+char *findpath(char *array, int *retVal, char num);
 char *_getenv(const char *name);
 char *_strcat(char *s1, char *s2);
-void error_printing(char *av, int count, char *command);
+void error_printing(char *av, char count, char *command);
 void print_string(char *string, int new_line);
-int print_number(int n);
 int _write(char c);
 
 #endif
