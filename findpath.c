@@ -6,7 +6,7 @@
  * @retVal: return value of exit
  * Return: the original command
  */
-char *findpath(char *array, int *retVal)
+char *findpath(char *array, int *retVal, char num)
 {
 	struct stat st;
 	char *path, *reserved_array;
@@ -32,7 +32,7 @@ char *findpath(char *array, int *retVal)
 		free(original_command);
 		token_path = strtok(NULL, ":");
 	}
-	error_printing(path, word_counter(array), reserved_array);
+	error_printing(path, num, reserved_array);
 	print_string(": not found", 0);
 	free(array);
 	*retVal = 127;
