@@ -4,6 +4,7 @@
  * findpath - find the command path folder
  * @array: the command
  * @retVal: return value of exit
+ * @num: number for orden
  * Return: the original command
  */
 char *findpath(char *array, int *retVal, char num)
