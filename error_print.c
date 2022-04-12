@@ -7,11 +7,11 @@
  * @array: the original command
  * Return: Always 0
  */
-void error_printing(char *av, int count, char *array)
+void error_printing(char *av, char count, char *array)
 {
 	print_string(av, 1);
 	print_string(": ", 1);
-	print_number(count);
+	_write(count);
 	print_string(": ", 1);
 	print_string(array, 1);
 }
@@ -32,34 +32,6 @@ void print_string(char *string, int new_line)
 		write(STDOUT_FILENO, &string[i], 1);
 	if (new_line == 0)
 		write(STDOUT_FILENO, "\n", 1);
-}
-/**
- * print_number - Entry point
- * @n: int
- * Return: length
- */
-int print_number(int n)
-{
-	int div;
-	int len;
-	unsigned int num;
-
-	div = 1;
-	len = 0;
-
-	num = n;
-
-	for (; num / div > 9; )
-		div *= 10;
-
-	for (; div != 0; )
-	{
-		len += _write('0' + num / div);
-		num %= div;
-		div /= 10;
-	}
-
-	return (len);
 }
 /**
  * _write - Entry point
